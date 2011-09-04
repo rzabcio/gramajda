@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>Lista gier</h2>
+{% for b in object_list %}
+	<b><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></b> (opiekun: <a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a>, posiadający: <a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a>)<br/>
+{% endfor %}
+
+{% if has_previous %}
+	<div style="text-align:center;"><a href="/?page={{ previous }}"><b>poprzednie</b></a></div>
+{% endif %}
+{% if has_next %}
+	<div style="text-align:center;"><a href="/?page={{ next }}"><b>następne</b></a></div>
+{% endif %}
+
+{% endblock %}

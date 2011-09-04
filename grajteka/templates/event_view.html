@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+
+{% if perms.grajteka.change_event %}
+	<h2>Wypożyczalnia '{{ request.session.event }}'</h2> <!-- (<a href="/event_change/">zmień</a>)</h1> -->
+
+	<div id="tab-container-1">
+	<ul id="tab-container-1-nav">
+		<li><a href="#listagier">Widok gier</a></li>
+		<li><a href="#listaosób">Widok osób</a></li>
+		<li><a href="#listawypozyczen">Widok wypożyczeń</a></li>
+	</ul>
+	
+	<div class="tab">
+		{% include 'event_view_boardgames.html' %}
+	</div>
+	<div class="tab">
+		{% include 'event_view_lenders.html' %}
+	</div>
+	<div class="tab">
+                {% include 'event_view_lends.html' %}
+        </div>
+	</div>
+	
+<script type="text/javascript">
+var tabber1 = new Yetii({
+	id: 'tab-container-1'
+});
+</script>
+{%else%}
+	<h2>Nie masz praw do zarządzania wypożyczalnią</h2>
+{% endif %}
+
+<!-- <h1>Wypożyczalnia {{ event.title }}</h1> -->
+
+
+{% endblock %}

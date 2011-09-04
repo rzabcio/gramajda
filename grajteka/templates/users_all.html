@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>Użytkownicy</h2>
+<ul>
+{% for u in users_all %}
+	<li><b><a href="/user/{{ u }}/">{{ u }}</a></b></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+#tab-container-1{
+	font: 13px;
+	color: #fff;
+	margin: 20px
+}
+
+#tab-container-1 ul#tab-container-1-nav{
+	margin: 0;
+	padding: 0
+}
+#tab-container-1 ul#tab-container-1-nav li{
+	display: inline
+}
+
+#tab-container-1 ul#tab-container-1-nav li a{
+	padding: 5px 10px;
+	background: #d9d9d9;
+	border: 1px solid #999;
+	color: #25252E;
+	text-decoration: none
+}
+#tab-container-1 .tab{
+	margin-top: 8px;
+	padding: 5px 20px;
+	border: 1px solid #ddd
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<meta name="Description" content="Information architecture, Web Design, Web Standards." />
+<meta name="Keywords" content="your, keywords" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="Distribution" content="Global" />
+<meta name="Author" content="Erwin Aligam - ealigam@gmail.com" />
+<meta name="Robots" content="index,follow" />		
+
+<link rel="stylesheet" href="/site_media/images/BluePigment.css" type="text/css" />
+<link rel="stylesheet" href="/site_media/images/yetii.css" type="text/css" />
+<script src="/site_media/jsUtils.js" type="text/javascript" ></script>
+<script src="/site_media/jsYetii.js" type="text/javascript" ></script>
+
+<title>Grajteka - Biblioteka Gramajdy</title>
+	
+</head>
+
+<body>
+
+	<!-- header starts here -->
+	<div id="header"><div id="header-content">	
+		
+		<h1 id="logo-text"><a href="/" title="">Graj<span>Teka</span></a></h1>	
+		<h2 id="slogan">Biblioteka najlepszych planszówek w Poznaniu!</h2>		
+		
+		<div id="header-links">
+			<p>
+				<a href="/">Home</a> |	
+				{% if user.is_authenticated %}
+					Zalogowano jako {{user.username}} | <a href="/accounts/logout/">Wyloguj</a>
+				{% else %}
+					<a href="/accounts/login/">Zaloguj</a>
+				{% endif %}
+			</p>		
+		</div>	
+	
+	</div></div>
+	
+	<!-- navigation starts here -->
+	<div id="nav-wrap"><div id="nav">
+		
+		<ul>
+			<li id="current"><a href="/">Home</a></li>
+			<li><a href="/boardgames_list/">Gry</a></li>
+			<li><a href="/user/">Użytkownicy</a></li>
+			{% if perms.grajteka.change_event %}
+				<li><a href="/event/">Wypożyczalnia</a></li>
+			{% endif %}
+			
+		</ul>
+	
+	</div></div>
+				
+	<!-- content-wrap starts here -->
+	<div id="content-wrap"><div id="content">	 
+	
+		<div id="sidebar" >	
+		
+				<div class="sep"></div>
+				
+				<div class="sidebox">
+					<h1>Search Box</h1>	
+					<form action="#" class="searchform">
+						<p>
+							<input name="search_query" class="textbox" type="text" />
+  							<input name="search" class="button" value="Search" type="submit" />
+						</p>			
+					</form>
+				</div>
+		
+				<div class="sidebox">
+					<h1>Sidebar Menu</h1>
+					<ul class="sidemenu">
+						<li><a href="/">Home</a></li>
+						{% if perms.grajteka.change_event %}
+							<li><a href=/change_event/">Zmień imprezę {{request.session.event}}</a></li>
+						{% endif %}
+					</ul>		
+				</div>
+			
+		</div>	
+	
+		<div id="main">		
+		
+			{% block main %}{% endblock %}
+
+		</div>			
+		
+	
+	<!-- content-wrap ends here -->		
+	</div></div>
+
+	<!-- footer starts here-->		
+	<div id="footer-wrap">
+	
+		<!-- <div id="footer-columns">
+			<div class="col3">
+				<h2>Tincidunt</h2>
+				<ul>
+					<li><a href="/">consequat molestie</a></li>
+				</ul>
+			</div>
+			<div class="col3-center">
+				<h2>Sed purus</h2>
+				<ul>
+					<li><a href="/">consequat molestie</a></li>
+				</ul>
+			</div>
+			<div class="col3">
+				<h2>Praesent</h2>
+				<ul>
+					<li><a href="/">consequat molestie</a></li>
+				</ul>
+			</div>
+		</div>	-->
+	
+		<div id="footer-bottom">
+
+            <p>
+			&copy; 2011 Gramajda
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+			<a href="http://www.bluewebtemplates.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a>
+
+   		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<a href="/">Home</a> |
+            		<a href="http://validator.w3.org/check?uri=referer">XHTML</a> |
+			<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+		</p>
+
+		</div>	
+
+<!-- footer ends-->
+</div>
+
+</body>
+</html>

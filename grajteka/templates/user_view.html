@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h1>{{ vieweduser.username }}</h1>
+Email: {{ vieweduser.email }}</br>
+
+{% if user.is_authenticated %}
+{% if owner_of %}
+        <h2>Jest właścicielem:</h2>
+        {% for b in owner_of %}
+                <b><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></b> (posiadający: <a href="/user/{{b.holder.username }}/">{{ b.holder }}</a>, opiekun: <a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a>)<br/>
+        {% endfor %}
+{% endif %}
+{% endif %}
+
+{% if patron_of %}
+	<h2>Opiekuje się:</h2>
+	{% for b in patron_of %}
+		<b><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></b> (posiadający: <a href="/user/{{b.holder.username }}/">{{ b.holder }}</a>)<br/>
+	{% endfor %}
+{% endif %}
+
+{% if holder_of %}
+	<h2>Posiada:</h2>
+	{% for b in holder_of %}
+		<b><a href="/boardgame/{{ b.id }}/">{{b.meta.title }}</a></b> (opiekun: <a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a>)<br/>
+	{% endfor %}
+{% endif %}
+
+{% endblock %}

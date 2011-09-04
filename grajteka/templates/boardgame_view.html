@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1>{{b.meta.title}}</h1>
+Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
+Właściciel: <a href="/user/{{ b.owner.username }}/">{{b.owner}}</a><br/>
+Opiekun: <a href="/user/{{ b.patron.username }}/">{{b.patron}}</a><br/>
+Posiada: <a href="/user/{{ b.holder.username }}/">{{b.holder}}</a><br/>
+
+<script type="text/javascript">
+function valid(menu,txt) {
+  if((menu.selectedIndex == 0) || (menu.selectedIndex == undefined)) {
+    alert('Wybierz z listy gracza pożyczającego.');
+    return false;
+  } 
+  if(txt.value == '') {
+      alert('Wpisz krótki komentarz.');
+      return false;
+  } else {
+      return true;
+  }
+}
+</script>
+<script>
+var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}]; 
+</script>
+
+{% if user.is_authenticated %}
+<h3 onclick="mouseClick('transferForm')" style="cursor: pointer;">Przekaż grę</h3>
+<form id="transferForm" action="/boardgame/transfer/" method="post" style="display:none;" onsubmit="return valid(this.holder_id,this.desc)">{% csrf_token %}
+	{{transfer_form.boardgame_id}}
+	<p>Nowy {{transfer_form.transfer_type}} : {{transfer_form.person_new_username}}</p>
+	<p>Powód zmiany: {{transfer_form.desc }}</p>
+	<input type="submit" value="Przekaż">
+</form>
+
+<h3 onclick="mouseClick('transferHistory')" style="cursor: pointer;">Historia</h3>
+<p id="transferHistory" style="display:none;">
+{% for t in transfers %}
+	{{t.date}} : {{t.changer}} zmienił(a) '{{t.type}}': <a href="/user/{{t.person_old.username}}">{{t.person_old.username}}</a> -> <a href="/user/{{t.person_new.username}}">{{t.person_new.username}}</a> ("{{t.desc}}")<br/>
+{% endfor %}
+
+{% endif %}
+</p>
+
+{% endblock %}
