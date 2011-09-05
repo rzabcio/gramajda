@@ -1,6 +1,21 @@
 <h3>Widok wypożyczeń</h3>
 
-{% for l in lends %}
-	<p>{{ l }}</p>
-{%endfor%}
 
+<table>
+<tbody>
+<tr>
+	<th class="first">Numerek</th>
+	<th>Gra</th>
+	<th>Wypożyczający</th>
+	<th>Akcje</th>
+</tr>
+{% for l in lends %}
+<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
+	<td class="first"> {{ l.event_lender.number }} </td>
+	<td> {{ l.event_boardgame.boardgame.meta.title }} </td>
+	<td> {{ l.event_lender.name }} </td>
+	<td> Zmień grę | Oddaj grę | Zwolnij numerek </td>
+</tr>
+{%endfor%}
+</tbody>
+</table>

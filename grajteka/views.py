@@ -16,7 +16,7 @@ def index(request):
 		context_instance=RequestContext(request))
 
 def boardgames_list(request):
-	boardgames = Boardgame.objects.all()
+	boardgames = Boardgame.objects.all().order_by("meta__title")
         return object_list(
                 request,
                 boardgames,
@@ -106,7 +106,7 @@ def event_view(request):
 		return HttpResponseRedirect('/event_change/')
 	event = request.session['event']
 	bgs = EventBoardgame.objects.all().filter(event=event)
-	lends = EventLendRecord.objects.all().filter(date_return=None) #.sort('number')
+	lends = EventLendRecord.objects.all().filter(date_return=None).order_by('event_lender__number')
 	lenders = EventLender.objects.filter(event=event).filter(number_datetime_return=None) #.sort('number')
 	return render_to_response('event_view.html',
 		{'bgs':bgs,'lends':lends,'lenders':lenders},

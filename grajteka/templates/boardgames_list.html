@@ -2,16 +2,32 @@
 
 {% block main %}
 
+<div class="box">
 <h2>Lista gier</h2>
+<table>
+<tbody>
+<tr>
+	<th class="firsts">Nazwa gry</th>
+	<th>Właściciel</th>
+	<th>Opiekun</th>
+	<th>Posiadający</th>
+</tr>
 {% for b in object_list %}
-	<b><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></b> (opiekun: <a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a>, posiadający: <a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a>)<br/>
+<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
+	<td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
+	<td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
+	<td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
+	<td><a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a></td>
+</tr>
 {% endfor %}
-
+</tbody>
+</table>
 {% if has_previous %}
 	<div style="text-align:center;"><a href="/?page={{ previous }}"><b>poprzednie</b></a></div>
 {% endif %}
 {% if has_next %}
 	<div style="text-align:center;"><a href="/?page={{ next }}"><b>następne</b></a></div>
 {% endif %}
+</div>
 
 {% endblock %}

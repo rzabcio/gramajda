@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block main %}
+
 <h1>{{b.meta.title}}</h1>
-Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
+
+
+
+<div class="box">
+<h4 onclick="mouseClick('information')" style="cursor: pointer;">Informacje ogólne</h4>
+<p id="information" style="display:none;">Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
 Właściciel: <a href="/user/{{ b.owner.username }}/">{{b.owner}}</a><br/>
 Opiekun: <a href="/user/{{ b.patron.username }}/">{{b.patron}}</a><br/>
-Posiada: <a href="/user/{{ b.holder.username }}/">{{b.holder}}</a><br/>
+Posiada: <a href="/user/{{ b.holder.username }}/">{{b.holder}}</a><br/></p>
+</div>
 
 <script type="text/javascript">
 function valid(menu,txt) {
@@ -26,6 +33,14 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 </script>
 
 {% if user.is_authenticated %}
+<div class="box">
+<table><tbody>
+<tr><th class="first">Właściciel</th><th>Opiekun</th><th>Posiada</th></tr>
+<tr class="row-a">
+	<td class="first"><b><a href="/user/{{ b.owner.username }}/">{{b.owner}}</a></b></td>
+	<td><b><a href="/user/{{ b.patron.username }}/">{{b.patron}}</a></b></td>
+	<td><b><a href="/user/{{ b.holder.username }}/">{{b.holder}}</a></b></td>
+</tr></tbody></table>
 <h3 onclick="mouseClick('transferForm')" style="cursor: pointer;">Przekaż grę</h3>
 <form id="transferForm" action="/boardgame/transfer/" method="post" style="display:none;" onsubmit="return valid(this.holder_id,this.desc)">{% csrf_token %}
 	{{transfer_form.boardgame_id}}
@@ -33,7 +48,9 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 	<p>Powód zmiany: {{transfer_form.desc }}</p>
 	<input type="submit" value="Przekaż">
 </form>
+</div>
 
+<div class="box">
 <h3 onclick="mouseClick('transferHistory')" style="cursor: pointer;">Historia</h3>
 <p id="transferHistory" style="display:none;">
 {% for t in transfers %}
@@ -42,5 +59,6 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 
 {% endif %}
 </p>
+</div>
 
 {% endblock %}
