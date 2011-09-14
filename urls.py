@@ -1,12 +1,14 @@
 from django.conf.urls.defaults import *
 
+from django.http import HttpResponseRedirect
+from django.conf import settings
 from django.contrib.auth.views import login,logout
 from django.contrib import admin
-admin.autodiscover()
-
-from django.http import HttpResponseRedirect
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from grajteka.views import *
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
@@ -33,3 +35,6 @@ urlpatterns = patterns('',
     (r'^/?event/$', 'grajteka.views.event_view'),
     (r'^/?event_change/$', 'grajteka.views.event_change_view'),
 )
+
+if settings.DEBUG:
+	urlpatterns += staticfiles_urlpatterns()
