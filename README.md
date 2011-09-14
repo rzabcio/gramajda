@@ -12,7 +12,7 @@ To implement boardgame library and lend service that can be:
 * lend: basic functionalities,
 * common: ajax features (for example asynchronous boardgames listing and refreshing).
 
-# Ideas implement (from next ones)
+# Ideas to implement (from next ones)
 * library: showing and selecting only specified library (for example Gramajda library as default),
 * library-lend: moving whole library to specific lend event.
 
