@@ -1,5 +1,6 @@
 # Purpose
-To implement boardgame library and lend service that could be...
+To implement boardgame library and lend service that could be:
+
 * used in Gramajda group,
 * connected with main Gramajda site <http://www.gramajda.pl>,
 * reused in other boardgaming groups.
