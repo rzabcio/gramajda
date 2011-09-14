@@ -1,5 +1,6 @@
 # Create your views here.
 
+import django
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -12,7 +13,7 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 
 def index(request):
 	return render_to_response('index.html',
-		None,
+		{'version':django.VERSION},
 		context_instance=RequestContext(request))
 
 def boardgames_list(request):
