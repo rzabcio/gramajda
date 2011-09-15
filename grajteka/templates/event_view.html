@@ -5,8 +5,24 @@
 
 {% if perms.grajteka.change_event %}
 <div class="page-header">
-	<h1>'{{ request.session.event }}' <small>wypożyczalnia dla eventu</small></h1> <!-- (<a href="/event_change/">zmień</a>)</h1> -->
+	<h1>{{ request.session.event.title }} <small>wypożyczalnia dla eventu</small></h1> <!-- (<a href="/event_change/">zmień</a>)</h1> -->
 </div>
+
+<!-- <script>
+$(function () {
+    var tabContainers = $('div.tab');
+    
+    $('ul.tabs a').click(function () {
+        tabContainers.hide().filter(this.hash).show();
+        
+        $('ul.tabs a').removeClass('active');
+        $(this).addClass('active');
+        
+        return false;
+    }).filter(':first').click();
+});	
+</script> -->
+
 
 <div class="span16 columns">
 	<!-- <div id="tab-container-1">
@@ -16,45 +32,39 @@
 		<li><a href="#listaosób">Widok osób</a></li>
 	</ul> -->
 
-	<ul class=tabs>
+	<div> 
+	<ul class="tabs">
 		<li class="active"><a href="#listawypozyczen">Wypożyczenia</a></li>
 		<li><a href="#listagier">Gry</a></li>
 		<li><a href="#listaosob">Osoby</a></li>
 		<li class="dropdown">
 			<a href='#' class="dropdown-toggle">Imprezy</a>
 			<ul class="dropdown-menu">
-				<li><a href="#">Secondary link</a></li>
-		        <li><a href="#">Something else here</a></li>
-		        <li class="divider"></li>
-		        <li><a href="#">Another link</a></li>
-			</ul>
-		
-			<!-- <ul class="dropdown-menu">
 				{% for e in event_choices %}
-				<li>{{ e.title }}</li>
+				<li id="event_id_{{e.id}}"><a href="/event_set/{{e.id}}/">{{ e.title }}</a></li>
 				{% endfor %}
-			</ul> -->
+			</ul>
 		</li>
 	</ul>
 
 
-	<div class="tab">
+	<div class="tab" id="listawypozyczen">
 	    {% include 'event_view_lends.html' %}
 	</div>
-	<div class="tab">
+	<div class="tab" id="listagier">
 		{% include 'event_view_boardgames.html' %}
 	</div>
-	<div class="tab">
+	<div class="tab" id="listaosob">
 		{% include 'event_view_lenders.html' %}
 	</div>
 	</div>
 
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 var tabber1 = new Yetii({
 	id: 'tab-container-1'
 });
-</script>
+</script> -->
 {%else%}
 <div class="span16 columns">
 	<div class="alert-message error">

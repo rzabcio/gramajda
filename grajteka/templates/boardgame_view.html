@@ -11,11 +11,14 @@
 <div class="row">
 
 <div class="span10 columns">
-<h2 onclick="mouseClick('information')" style="cursor: pointer;">O grze</h2>
-<p id="information" style="display:none;">Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
+<!-- <h2 onclick="mouseClick('information')" style="cursor: pointer;">O grze</h2> -->
+<h2>Informacje ogólne</h2>
+<div class="alert-message block-message info">
+<p id="information">Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
 Liczba graczy: {{b.meta.min_players}}-{{b.meta.max_players}}<br/>
 Czas gry: {{b.meta.min_time}}-{{b.meta.max_time}} min<br/>
 Zalecany minimalny wiek graczy: {{b.meta.min_age}} lat(a)</p>
+</div>
 
 <script type="text/javascript">
 function valid(menu,txt) {

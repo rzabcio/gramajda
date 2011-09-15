@@ -34,6 +34,7 @@ urlpatterns = patterns('',
 
     (r'^/?event/$', 'grajteka.views.event_view'),
     (r'^/?event_change/$', 'grajteka.views.event_change_view'),
+	(r'^/?event_set/(?P<eventid>\d+)/$', 'grajteka.views.event_set'),
 )
 
 if settings.DEBUG:

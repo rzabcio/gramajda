@@ -99,13 +99,21 @@ def event_change_view(request):
 		{'event_change_form':event_change_form},
 		context_instance=RequestContext(request))
 
+def event_set(request,eventid):
+#	if request.method == 'GET':
+#		if 'event_id' in request.session:
+#			request.session['event']=Event.objects.get(id=cd['event_id'])
+	request.session['event']=Event.objects.get(id=eventid)
+	return HttpResponseRedirect('/event/')
+	
+
 def is_event_selected(request):
 	return request.session['event'] == None or request.session['event'] == ''
 
 def event_view(request):
 	#if not 'event' in request.session:
 	#	return HttpResponseRedirect('/event_change/')
-	event_choises = Event.objects.all()
+	event_choices = Event.objects.all()
 	if 'event' in request.session:
 		event = request.session['event']
 		bgs = EventBoardgame.objects.all().filter(event=event)
