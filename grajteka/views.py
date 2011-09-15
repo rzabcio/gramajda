@@ -103,12 +103,18 @@ def is_event_selected(request):
 	return request.session['event'] == None or request.session['event'] == ''
 
 def event_view(request):
-	if not 'event' in request.session:
-		return HttpResponseRedirect('/event_change/')
-	event = request.session['event']
-	bgs = EventBoardgame.objects.all().filter(event=event)
-	lends = EventLendRecord.objects.all().filter(date_return=None).order_by('event_lender__number')
-	lenders = EventLender.objects.filter(event=event).filter(number_datetime_return=None) #.sort('number')
+	#if not 'event' in request.session:
+	#	return HttpResponseRedirect('/event_change/')
+	event_choises = Event.objects.all()
+	if 'event' in request.session:
+		event = request.session['event']
+		bgs = EventBoardgame.objects.all().filter(event=event)
+		lends = EventLendRecord.objects.all().filter(date_return=None).order_by('event_lender__number')
+		lenders = EventLender.objects.filter(event=event).filter(number_datetime_return=None) #.sort('number')
+	else:
+		bgs = None
+		lends = None
+		lenders = None
 	return render_to_response('event_view.html',
-		{'bgs':bgs,'lends':lends,'lenders':lenders},
+		{'bgs':bgs,'lends':lends,'lenders':lenders,'event_choices':event_choices},
 		context_instance=RequestContext(request))

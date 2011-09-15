@@ -2,17 +2,20 @@
 
 {% block main %}
 
-<h1>{{b.meta.title}}</h1>
-
-
-
-<div class="box">
-<h4 onclick="mouseClick('information')" style="cursor: pointer;">Informacje ogólne</h4>
-<p id="information" style="display:none;">Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
-Właściciel: <a href="/user/{{ b.owner.username }}/">{{b.owner}}</a><br/>
-Opiekun: <a href="/user/{{ b.patron.username }}/">{{b.patron}}</a><br/>
-Posiada: <a href="/user/{{ b.holder.username }}/">{{b.holder}}</a><br/></p>
+<section>
+<div class="page-header">
+	<h1>{{b.meta.title}}</h1>
 </div>
+
+
+<div class="row">
+
+<div class="span10 columns">
+<h2 onclick="mouseClick('information')" style="cursor: pointer;">O grze</h2>
+<p id="information" style="display:none;">Link do BGG: <a href="{{ b.meta.bgg_link}}">{{b.meta.bgg_link}}</a><br/>
+Liczba graczy: {{b.meta.min_players}}-{{b.meta.max_players}}<br/>
+Czas gry: {{b.meta.min_time}}-{{b.meta.max_time}} min<br/>
+Zalecany minimalny wiek graczy: {{b.meta.min_age}} lat(a)</p>
 
 <script type="text/javascript">
 function valid(menu,txt) {
@@ -31,9 +34,12 @@ function valid(menu,txt) {
 <script>
 var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}]; 
 </script>
+</div>
+
 
 {% if user.is_authenticated %}
-<div class="box">
+<div class="span6 columns">
+<h2>Stan gry</h2>
 <table><tbody>
 <tr><th class="first">Właściciel</th><th>Opiekun</th><th>Posiada</th></tr>
 <tr class="row-a">
@@ -41,6 +47,12 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 	<td><b><a href="/user/{{ b.patron.username }}/">{{b.patron}}</a></b></td>
 	<td><b><a href="/user/{{ b.holder.username }}/">{{b.holder}}</a></b></td>
 </tr></tbody></table>
+</div>
+</div>
+
+
+<div class="row">
+<div class="span16 columns">
 <h3 onclick="mouseClick('transferForm')" style="cursor: pointer;">Przekaż grę</h3>
 <form id="transferForm" action="/boardgame/transfer/" method="post" style="display:none;" onsubmit="return valid(this.holder_id,this.desc)">{% csrf_token %}
 	{{transfer_form.boardgame_id}}
@@ -49,8 +61,12 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 	<input type="submit" value="Przekaż">
 </form>
 </div>
+</div>
 
-<div class="box">
+
+
+<div class="row">
+<div class="span16 columns">
 <h3 onclick="mouseClick('transferHistory')" style="cursor: pointer;">Historia</h3>
 <p id="transferHistory" style="display:none;">
 {% for t in transfers %}
@@ -60,5 +76,8 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 {% endif %}
 </p>
 </div>
+</div>
+
+</section>
 
 {% endblock %}

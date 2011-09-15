@@ -17,7 +17,7 @@ TRANSFER_TYPES = (
 
 class BoardgameMeta(models.Model):
 	title = models.CharField(max_length=255, unique=True, verbose_name='Tytuł')
-	bgg_link = models.URLField(max_length=255, verify_exists=True, verbose_name='Gra na BGG')
+	bgg_link = models.URLField(max_length=255, verbose_name='Gra na BGG')
 	min_players = models.IntegerField(blank=True)
 	max_players = models.IntegerField(blank=True)
 	min_time = models.IntegerField(blank=True)
@@ -39,8 +39,8 @@ class Boardgame(models.Model):
 	holder = models.ForeignKey(User, blank=True, related_name='holder')
 
 	class Meta:
-		verbose_name="Egzemplarz gry"
-		verbose_name_plural="Egzemplarze gier"
+		verbose_name="Gra planszowa - egzemplarz"
+		verbose_name_plural="Gry planszowe - egzemplarze"
 	def __str__(self):
 		return self.meta.title
 	def __unicode__(self):

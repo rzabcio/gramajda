@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 
 {% block main %}
+<section>
 
-<div class="box">
-<h2>Lista gier</h2>
-<table>
+
+<div class="page-header">
+	<h1>Biblioteka <small>lista gier znajdujących się w systemie</small></h1>
+</div>
+
+<div class="span16 columns">
+<table class="zebra-striped">
 <tbody>
 <tr>
-	<th class="firsts">Nazwa gry</th>
+	<th>Nazwa gry</th>
 	<th>Właściciel</th>
 	<th>Opiekun</th>
 	<th>Posiadający</th>
 </tr>
 {% for b in object_list %}
-<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
+<!-- <tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}"> -->
+<tr>
 	<td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
 	<td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
 	<td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
@@ -30,4 +36,5 @@
 {% endif %}
 </div>
 
+</section>
 {% endblock %}

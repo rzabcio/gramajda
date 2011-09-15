@@ -11,134 +11,87 @@
 <meta name="Author" content="Erwin Aligam - ealigam@gmail.com" />
 <meta name="Robots" content="index,follow" />		
 
-<link rel="stylesheet" href="{{ STATIC_URL }}images/BluePigment.css" type="text/css" />
+<!-- <link rel="stylesheet" href="{{ STATIC_URL }}images/BluePigment.css" type="text/css" /> -->
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css">
 <link rel="stylesheet" href="{{ STATIC_URL }}images/yetii.css" type="text/css" />
-<script src="{{ STATIC_URL }}jsUtils.js" type="text/javascript" ></script>
-<script src="{{ STATIC_URL }}jsYetii.js" type="text/javascript" ></script>
+
+<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+<script src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
+<script src="{{ STATIC_URL }}js/google-code-prettify/prettify.js"></script>
+<script src="{{ STATIC_URL }}js/application.js"></script>
+<script src="{{ STATIC_URL }}js/jsUtils.js" type="text/javascript" ></script>
+<script src="{{ STATIC_URL }}js/jsYetii.js" type="text/javascript" ></script>
 
 <title>Grajteka - Biblioteka Gramajdy</title>
 	
 </head>
 
 <body>
+	
+	<div class="topbar">
+	<div class="topbar-inner">
+        <div class="container">
+			<h3><a href="/">Grajteka</a></h3>
+			<ul class="nav">
+				<li class=""><a href="/user/">Gracze</a></li>
+				<li class=""><a href="/boardgames_list/">Biblioteka</a></li>
+				{% if perms.grajteka.change_event %}
+					<li class=""><a href="/event/">Wypożyczalnia</a></li>
+					{% endif %}
+			</ul>
+			<ul class="nav secondary-nav">
+					{% if user.is_authenticated %}
+						<li class=""><a href="/accounts/logout/">Wyloguj {{user.username}}</a></li>
+					{% else %}
+						<form action="/accounts/login/" method="post">{% csrf_token %}
+							<input type="text" name="username" value="" id="username" placeholder="login" style="width:60px;">
+							<input type="password" name="password" value="" id="password" placeholder="hasło" style="width:60px;">
+							<input type="submit" value="login" style="visibility:hidden;"/>							
+							<input type="hidden" name="next" value="{{ next|escape }}" />
+						</form>
+						<!-- <li class=""><a href="/accounts/login/">Zaloguj</a></li> -->
+					{% endif %}
+			</ul>
+        </div>
+	</div>
+	</div>
+	
 
 	<!-- header starts here -->
-	<div id="header"><div id="header-content">	
-		
-		<h1 id="logo-text"><a href="/" title="">Graj<span>Teka</span></a></h1>	
-		<h2 id="slogan">Biblioteka najlepszych planszówek w Poznaniu!</h2>		
-		
-		<div id="header-links">
-			<p>
-				<a href="/">Home</a> |	
-				{% if user.is_authenticated %}
-					Zalogowano jako {{user.username}} | <a href="/accounts/logout/">Wyloguj</a>
-				{% else %}
-					<a href="/accounts/login/">Zaloguj</a>
-				{% endif %}
-			</p>		
-		</div>	
-	
-	</div></div>
-	
-	<!-- navigation starts here -->
-	<div id="nav-wrap"><div id="nav">
-		
-		<ul>
-			<li id="current"><a href="/">Home</a></li>
-			<li><a href="/user/">Gracze</a></li>
-			<li><a href="/boardgames_list/">Biblioteka</a></li>
-			{% if perms.grajteka.change_event %}
-				<li><a href="/event/">Wypożyczalnia</a></li>
-			{% endif %}
-			
-		</ul>
-	
-	</div></div>
-				
-	<!-- content-wrap starts here -->
-	<div id="content-wrap"><div id="content">	 
-	
-		<div id="sidebar" >	
-		
-				<div class="sep"></div>
-				
-				<div class="sidebox">
-					<h1>Search Box</h1>	
-					<form action="#" class="searchform">
-						<p>
-							<input name="search_query" class="textbox" type="text" />
-  							<input name="search" class="button" value="Search" type="submit" />
-						</p>			
-					</form>
-				</div>
-		
-				<div class="sidebox">
-					<h1>Sidebar Menu</h1>
-					<ul class="sidemenu">
-						<li><a href="/">Home</a></li>
-						{% if perms.grajteka.change_event %}
-							<li><a href=/change_event/">Zmień imprezę {{request.session.event}}</a></li>
-						{% endif %}
-					</ul>		
-				</div>
-			
-		</div>	
-	
-		<div id="main">		
-		
-			{% block main %}{% endblock %}
+	<div class="container-fluid" id="main" style="padding-top: 60px;">
 
-		</div>			
-		
-	
-	<!-- content-wrap ends here -->		
-	</div></div>
-
-	<!-- footer starts here-->		
-	<div id="footer-wrap">
-	
-		<!-- <div id="footer-columns">
-			<div class="col3">
-				<h2>Tincidunt</h2>
-				<ul>
-					<li><a href="/">consequat molestie</a></li>
-				</ul>
+		<div class="sidebar">
+			<div class="page-header">
+				<h1>Sidebar</h1>
 			</div>
-			<div class="col3-center">
-				<h2>Sed purus</h2>
-				<ul>
-					<li><a href="/">consequat molestie</a></li>
-				</ul>
+			<div>
+			<p>Tekst w sidebar</p>
+
+			<a href="/">Link 2</a>
+			<table class=zebra-striped>
+				<tbody>
+					<tr><th>Linki</th></tr>
+					<tr><td><a href="/">Link 1</a></td></tr>
+					<tr><td><a href="/">Link 2</a></td></tr>
+					<tr><td><a href="/">Link 3</a></td></tr>
+					<tr><td><a href="/">Link 4</a></td></tr>
+				</tbody>
+			</table>
 			</div>
-			<div class="col3">
-				<h2>Praesent</h2>
-				<ul>
-					<li><a href="/">consequat molestie</a></li>
-				</ul>
-			</div>
-		</div>	-->
+		</div>
+		<div class="content">
+		
+		{% block main %}{% endblock %}
+
+		</div>
+	</div>			
+	<!-- content-wrap ends here -->
 	
-		<div id="footer-bottom">
-
-            <p>
-			&copy; 2011 Gramajda
-
-            &nbsp;&nbsp;&nbsp;&nbsp;
-
-			<a href="http://www.bluewebtemplates.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a>
-
-   		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-			<a href="/">Home</a> |
-            		<a href="http://validator.w3.org/check?uri=referer">XHTML</a> |
-			<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
-		</p>
-
-		</div>	
-
-<!-- footer ends-->
-</div>
+	<div class="footer">
+		<div id="inner">
+			<p>&copy; 2011 Gramajda</p>
+		</div>
+	</div>	
 
 </body>
 </html>

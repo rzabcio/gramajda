@@ -5,7 +5,7 @@
 <h2>Wybierz imprezę</h2>
 <form action="/event_change/" method="post"> {% csrf_token %}
 	<!-- {{ event_change_form.event_new }} -->
-	{{ event_change_form.event_id }} <input type="submit" value="Wybierz">
+	{{ event_change_form.event_id }} <input type="submit" value="Wybierz" class="btn">
 </form>
 
 <!-- <h1>Wypożyczalnia {{ event.title }}</h1> -->

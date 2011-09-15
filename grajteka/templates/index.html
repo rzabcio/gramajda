@@ -2,19 +2,27 @@
 
 {% block main %}
 
-<div class="box">
-<h2>Strona główna</h2>
-<p>Celem strony jest implementacja biblioteki gier planszowych, a w dalszym planie także udostępnienie serwisu do obługi wypożyczalni na imprezach.</p>
-<p>Wersja Django: {{ version }}</p>
-<p>Link do staticfile: <a href="{{ STATIC_URL }}images/BluePigment.css">link</a></p>
+<section id="mainsection">
+<div class="page-header">
+	<h1>Informacje <small>czyli o co chodzi?</small></h1>
 </div>
 
-<div class="box">
-<h2>Rozwój - planowane funkcje</h2>
-<p>Wypożyczalnia:</p>
-<ul>
-	<li>przenoszenie masowe gier z biblioteki (dowolnej) do wypożyczalni,</li>
-	<li>widok użytkownika (wypożyczającego) wraz z całą jego historią.</li>
-</ul>
+<div class="row">
+	<div class="span5 columns">
+		<h2>Motywacja</h2>
+		<p>Celem strony jest implementacja biblioteki gier planszowych, a w dalszym planie także udostępnienie serwisu do obługi wypożyczalni na imprezach.</p>
+		<p>Wersja Django: {{ version }}</p>
+		<p>Używamy <a href="http://twitter.github.com/bootstrap/">Bootstrap</a></p>
+	</div>
+
+	<div class="span11 columns">
+		<h2>Planowane funkcje</h2>
+		<p>Wypożyczalnia:</p>
+		<ul>
+			<li>przenoszenie masowe gier z biblioteki (dowolnej) do wypożyczalni,</li>
+			<li>widok użytkownika (wypożyczającego) wraz z całą jego historią.</li>
+		</ul>
+	</div>
 </div>
+</section>
 {% endblock %}
