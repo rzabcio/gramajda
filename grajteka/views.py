@@ -16,6 +16,11 @@ def index(request):
 		{'version':django.VERSION},
 		context_instance=RequestContext(request))
 
+def poligon(request):
+	return render_to_response('poligon.html',
+		{'version':django.VERSION},
+		context_instance=RequestContext(request))
+
 def boardgames_list(request):
 	boardgames = Boardgame.objects.all().order_by("meta__title")
         return object_list(
@@ -24,7 +29,6 @@ def boardgames_list(request):
                 paginate_by=20,
                 extra_context={},
 		template_name='boardgames_list.html')
-
 
 def boardgame_view(request,boardgameid):
 	b = Boardgame.objects.get(id=boardgameid)

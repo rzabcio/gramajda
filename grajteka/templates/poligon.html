@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<script>
+$(document).ready(function() {
+//$.get("/json/boardgames_list/", function(data) {
+//	$(result).html(data)
+//});
+
+//$.get("/json/boardgames_list/", function(data) {
+//	var json = jQuery.parseJSON('[{"name":"John"}]');
+//	alert( json[0].name );
+//});
+
+$.getJSON("/json/boardgames_list/", function(data) {
+	var items = [];
+	$.each(data, function() {
+		items.push('<li>' + this.fields.meta + '</li>');
+	});
+
+	$('<ul/>', {
+		'class': 'my-new-list',
+		html: items.join('')
+	}).appendTo('#result');
+});
+});
+</script>
+
+<section id="mainsection">
+<div class="page-header">
+	<h1>Poligon <small>testujący nowe funkcjonalności</small></h1>
+</div>
+
+<div class="row">
+	<div class="span16 columns">
+		<h2>AJAX i JSON</h2>
+		<p id="result"></p>
+	</div>
+</div>
+</section>
+{% endblock %}

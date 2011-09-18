@@ -1,13 +1,5 @@
-{% extends "base.html" %}
-
-{% block main %}
-<section>
-
-<div class="page-header">
-	<h1>{{ vieweduser.username }}</h1>
-</div>
-
 <div class="span16 columns">
+<h2>{{ vieweduser.username }}</h2>
 <p>Email: {{ vieweduser.email }}</br></p>
 
 {% if user.is_authenticated %}
@@ -78,6 +70,3 @@
 	</table>
 {% endif %}
 </div>
-
-</section>
-{% endblock %}

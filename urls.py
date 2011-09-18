@@ -35,6 +35,10 @@ urlpatterns = patterns('',
     (r'^/?event/$', 'grajteka.views.event_view'),
     (r'^/?event_change/$', 'grajteka.views.event_change_view'),
 	(r'^/?event_set/(?P<eventid>\d+)/$', 'grajteka.views.event_set'),
+
+	(r'^/?json/boardgames_list/$', 'grajteka.jsons.boardgames_list'),
+
+	(r'^/?poligon/$', 'grajteka.views.poligon'),
 )
 
 if settings.DEBUG:

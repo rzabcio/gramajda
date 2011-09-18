@@ -16,11 +16,6 @@ $(document).ready(function(){
     return false;
   });
 
-  //${"a").click(function (e) {
-//	var $li = $(this).parent("li");
-  //});
-  //
-  //
   var tabContainers = $('div.tab');
     
   $('ul.tabs a').click(function () {

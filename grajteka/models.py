@@ -15,7 +15,12 @@ TRANSFER_TYPES = (
 ## LIBRARY
 #################################
 
+class BoardgameMetaManager(models.Manager):
+	def get_by_natural_key(self,title):
+		return self.get(title=title)
+
 class BoardgameMeta(models.Model):
+	objects = BoardgameMetaManager()
 	title = models.CharField(max_length=255, unique=True, verbose_name='Tytuł')
 	bgg_link = models.URLField(max_length=255, verbose_name='Gra na BGG')
 	min_players = models.IntegerField(blank=True)
@@ -31,6 +36,8 @@ class BoardgameMeta(models.Model):
 		return self.title
 	def __unicode__(self):
 		return self.title
+	def natural_key(self):
+		return (self.title)
 
 class Boardgame(models.Model):
 	meta = models.ForeignKey(BoardgameMeta)
