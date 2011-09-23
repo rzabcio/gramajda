@@ -7,7 +7,8 @@ $(document).ready(function() {
 $.getJSON("/json/boardgames_list/", function(data) {
 	var items = [];
 	$.each(data, function() {
-		items.push('<li>' + this.fields.owner + '</li>');
+		items.push('<li>' + this.fields.meta + '-' + this.fields.owner + '-' + this.fields.patron + '-' + this.fields.holder + '</li>');
+		//items.push('<li>' + this.fields.meta + '-' + this.fields.owner + '</li>');
 	});
 
 	$('<ul/>', {

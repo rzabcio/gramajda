@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block main %}
+<section>
+
+
+<div class="page-header">
+	<h1>Biblioteka <small>lista gier znajdujących się w systemie</small></h1>
+</div>
+
+<div class="span16 columns">
+<table class="zebra-striped">
+<tbody>
+<tr>
+	<th>Nazwa gry</th>
+	<th>Właściciel</th>
+	<th>Opiekun</th>
+	<th>Posiadający</th>
+</tr>
+{% for b in object_list %}
+<tr>
+	<td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
+	<td><a href="/user/{{ b.owner.user.username }}/">{{ b.owner }}</a></td>
+	<td><a href="/user/{{ b.patron.user.username }}/">{{ b.patron }}</a></td>
+	<td><a href="/user/{{ b.holder.user.username }}/">{{ b.holder }}</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p id="result"></p>
+{% if has_previous %}
+	<div style="text-align:center;"><a href="/?page={{ previous }}"><b>poprzednie</b></a></div>
+{% endif %}
+{% if has_next %}
+	<div style="text-align:center;"><a href="/?page={{ next }}"><b>następne</b></a></div>
+{% endif %}
+</div>
+
+</section>
+
+<script>
+$.getJSON("/json/boardgames_list/", function(data) {
+	var items = [];
+	$.each(data, function() {
+		items.push('<tr>'
+			+ '<td><a href=\"/boardgame/' + this.fields.meta + '/\">' + this.fields.meta + '</a></td>'
+			+ '<td><a href=\"/user/' + this.fields.owner + '/\">' + this.fields.owner + '</a></td>'
+			+ '<td><a href=\"/user/' + this.fields.patron + '/\">' + this.fields.patron + '</a></td>'
+			+ '<td><a href=\"/user/' + this.fields.holder + '/\">' + this.fields.holder + '</a></td>'
+			+ '</tr>');
+	});
+	alert('Test')
+	//$('#result').append('<table class=\"zebra-striped\"><tbody><tr><th>Nazwa gry</th><th>Właściciel</th><th>Opiekun</th><th>Posiadający</th></tr>' + items + '</tbody></table>');
+	$('#result').append(boardgamesJsonToTable(data));
+});
+</script>
+
+{% endblock %}
