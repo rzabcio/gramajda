@@ -10,7 +10,7 @@ from django.template import RequestContext
 
 from grajteka.models import *
 
-def boardgames_list(request):
+def json_boardgames_list(request):
 	boardgames = Boardgame.objects.all().order_by("meta__title")
 	data = serializers.serialize("json", boardgames, indent=2, use_natural_keys=True)
 	return HttpResponse(data)

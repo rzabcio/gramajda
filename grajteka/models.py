@@ -15,6 +15,16 @@ TRANSFER_TYPES = (
 ## LIBRARY
 #################################
 
+class GUser(models.Model):
+	user = models.OneToOneField(User)
+	
+	def __str__(self):
+		return self.user.username
+	def __unicode__(self):
+		return self.user.username
+	def natural_key(self):
+		return self.user.username
+
 class BoardgameMetaManager(models.Manager):
 	def get_by_natural_key(self,title):
 		return self.get(title=title)
@@ -41,9 +51,9 @@ class BoardgameMeta(models.Model):
 
 class Boardgame(models.Model):
 	meta = models.ForeignKey(BoardgameMeta)
-	owner = models.ForeignKey(User, blank=True, related_name='owner')
-	patron = models.ForeignKey(User, blank=True, related_name='patron')
-	holder = models.ForeignKey(User, blank=True, related_name='holder')
+	owner = models.ForeignKey(GUser, blank=True, related_name='owner')
+	patron = models.ForeignKey(GUser, blank=True, related_name='patron')
+	holder = models.ForeignKey(GUser, blank=True, related_name='holder')
 
 	class Meta:
 		verbose_name="Gra planszowa - egzemplarz"
@@ -56,19 +66,19 @@ class Boardgame(models.Model):
 class Transfer(models.Model):
 	desc = models.CharField(max_length=255, verbose_name='Komentarz')
 	boardgame = models.ForeignKey(Boardgame)
-	person_new = models.ForeignKey(User, related_name='person_new')
-	person_old = models.ForeignKey(User, related_name='person_old')
+	person_new = models.ForeignKey(GUser, related_name='person_new')
+	person_old = models.ForeignKey(GUser, related_name='person_old')
 	type = models.CharField(max_length=1, choices=TRANSFER_TYPES)
 	date = models.DateTimeField(auto_now_add=True)
-	changer = models.ForeignKey(User, related_name='changer')
+	changer = models.ForeignKey(GUser, related_name='changer')
 
 	class Meta:
 		verbose_name="Transfer gry"
 		verbose_name_plural="Transfery gier"
 	def __str__(self):
-		return self.date.__str__() + ' \"' + self.boardgame.title + '\" ' + self.person_old.username + " -> " + self.person_new.username + ' (' + self.changer.username + '\"' + self.desc + '\")'
+		return self.date.__str__() + ' \"' + self.boardgame.meta.title + '\" ' + self.person_old.user.username + " -> " + self.person_new.user.username + ' (' + self.changer.user.username + '\"' + self.desc + '\")'
 	def __unicode(self):
-		return self.date.__str__() + ' \"' + self.boardgame.title + '\" ' + self.person_old.username + " -> " + self.person_new.username + ' (' + self.changer.username + '\"' + self.desc + '\")'
+		return self.date.__str__() + ' \"' + self.boardgame.meta.title + '\" ' + self.person_old.user.username + " -> " + self.person_new.user.username + ' (' + self.changer.user.username + '\"' + self.desc + '\")'
 
 
 ###############################################

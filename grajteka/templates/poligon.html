@@ -4,19 +4,10 @@
 
 <script>
 $(document).ready(function() {
-//$.get("/json/boardgames_list/", function(data) {
-//	$(result).html(data)
-//});
-
-//$.get("/json/boardgames_list/", function(data) {
-//	var json = jQuery.parseJSON('[{"name":"John"}]');
-//	alert( json[0].name );
-//});
-
 $.getJSON("/json/boardgames_list/", function(data) {
 	var items = [];
 	$.each(data, function() {
-		items.push('<li>' + this.fields.meta + '</li>');
+		items.push('<li>' + this.fields.owner + '</li>');
 	});
 
 	$('<ul/>', {
@@ -38,5 +29,11 @@ $.getJSON("/json/boardgames_list/", function(data) {
 		<p id="result"></p>
 	</div>
 </div>
+
+<script>
+	$('#result').append('<p>Testowe dodanie.</p>');
+</script>
+
+
 </section>
 {% endblock %}

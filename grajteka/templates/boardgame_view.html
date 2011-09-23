@@ -46,9 +46,9 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 <table><tbody>
 <tr><th class="first">Właściciel</th><th>Opiekun</th><th>Posiada</th></tr>
 <tr class="row-a">
-	<td class="first"><b><a href="/user/{{ b.owner.username }}/">{{b.owner}}</a></b></td>
-	<td><b><a href="/user/{{ b.patron.username }}/">{{b.patron}}</a></b></td>
-	<td><b><a href="/user/{{ b.holder.username }}/">{{b.holder}}</a></b></td>
+	<td class="first"><b><a href="/user/{{ b.owner.user.username }}/">{{b.owner}}</a></b></td>
+	<td><b><a href="/user/{{ b.patron.user.username }}/">{{b.patron}}</a></b></td>
+	<td><b><a href="/user/{{ b.holder.user.username }}/">{{b.holder}}</a></b></td>
 </tr></tbody></table>
 </div>
 </div>
@@ -73,7 +73,7 @@ var arrValues = [ {% for user in users %} "{{user.username}}", {%endfor%}];
 <h3 onclick="mouseClick('transferHistory')" style="cursor: pointer;">Historia</h3>
 <p id="transferHistory" style="display:none;">
 {% for t in transfers %}
-	{{t.date}} : {{t.changer}} zmienił(a) '{{t.type}}': <a href="/user/{{t.person_old.username}}">{{t.person_old.username}}</a> -> <a href="/user/{{t.person_new.username}}">{{t.person_new.username}}</a> ("{{t.desc}}")<br/>
+	{{t.date}} : {{t.changer}} zmienił(a) '{{t.type}}': <a href="/user/{{t.person_old.username}}">{{t.person_old.user.username}}</a> -> <a href="/user/{{t.person_new.user.username}}">{{t.person_new.user.username}}</a> ("{{t.desc}}")<br/>
 {% endfor %}
 
 {% endif %}

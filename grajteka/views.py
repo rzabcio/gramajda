@@ -8,7 +8,7 @@ from django.views.generic.list_detail import object_list
 
 from grajteka.models import *
 from grajteka.forms import *
-from django.contrib.auth.models import User
+from grajteka.jsons import *
 from django.contrib.auth.decorators import login_required,user_passes_test
 
 def index(request):
@@ -21,7 +21,9 @@ def poligon(request):
 		{'version':django.VERSION},
 		context_instance=RequestContext(request))
 
-def boardgames_list(request):
+def boardgames_list(request,json):
+	if json:
+		return json_boardgames_list(request)
 	boardgames = Boardgame.objects.all().order_by("meta__title")
         return object_list(
                 request,
@@ -32,10 +34,10 @@ def boardgames_list(request):
 
 def boardgame_view(request,boardgameid):
 	b = Boardgame.objects.get(id=boardgameid)
-	users = User.objects.all().order_by('username')
+	users = GUser.objects.all().order_by('user__username')
 	users_as_table = ''
 	for u in users:
-		users_as_table += '"' + u.username + '", '
+		users_as_table += '"' + u.user.username + '", '
 	transfer_form = TransferForm(initial={'boardgame_id':boardgameid})
 	transfers = Transfer.objects.filter(boardgame=b)
 	return render_to_response('boardgame_view.html',
@@ -48,7 +50,7 @@ def boardgame_transfer(request):
 		if form.is_valid():
 			cd = form.cleaned_data
 			b = Boardgame.objects.get(id=cd['boardgame_id'])
-			person_new = User.objects.get(username=cd['person_new_username'])
+			person_new = GUser.objects.get(user__username=cd['person_new_username'])
 			transfer_type = cd['transfer_type']
 			if transfer_type == 'o':
 				person_old = b.owner
@@ -66,7 +68,7 @@ def boardgame_transfer(request):
 	return HttpResponseRedirect('/boardgame/' + str(b.id) + '/')
 
 def user_view(request,username):
-	p = User.objects.get(username=username)
+	p = GUser.objects.get(user__username=username)
 
 	#boardgames = p.boardgame_set.all()
 	owner_of = Boardgame.objects.filter(owner=p)
@@ -79,7 +81,7 @@ def user_view(request,username):
 		context_instance=RequestContext(request))
 
 def users_all(request):
-	users = User.objects.all()
+	users = GUser.objects.all()
 	return render_to_response('users_all.html',
 		{'users_all':users},
 		context_instance=RequestContext(request))

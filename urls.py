@@ -28,7 +28,8 @@ urlpatterns = patterns('',
     (r'^/?accounts/logout/$', logout),
     (r'^/?user/(?P<username>\w+)/$', 'grajteka.views.user_view'),
     (r'^/?user/$', 'grajteka.views.users_all'),
-    (r'^/?boardgames_list/$', 'grajteka.views.boardgames_list'),
+	(r'^/?(?P<json>json/)?boardgames_list/$', 'grajteka.views.boardgames_list'),
+    (r'^/?(?P<json>json/)?boardgames/$', 'grajteka.views.boardgames'),
     (r'^/?boardgame/(?P<boardgameid>\d+)/$', 'grajteka.views.boardgame_view'),
     (r'^/?boardgame/transfer/$', 'grajteka.views.boardgame_transfer'),
 
@@ -36,7 +37,7 @@ urlpatterns = patterns('',
     (r'^/?event_change/$', 'grajteka.views.event_change_view'),
 	(r'^/?event_set/(?P<eventid>\d+)/$', 'grajteka.views.event_set'),
 
-	(r'^/?json/boardgames_list/$', 'grajteka.jsons.boardgames_list'),
+	#(r'^/?json/boardgames_list/$', 'grajteka.jsons.boardgames_list'),
 
 	(r'^/?poligon/$', 'grajteka.views.poligon'),
 )

@@ -18,12 +18,11 @@
 	<th>Posiadający</th>
 </tr>
 {% for b in object_list %}
-<!-- <tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}"> -->
 <tr>
 	<td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
-	<td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
-	<td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
-	<td><a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a></td>
+	<td><a href="/user/{{ b.owner.user.username }}/">{{ b.owner }}</a></td>
+	<td><a href="/user/{{ b.patron.user.username }}/">{{ b.patron }}</a></td>
+	<td><a href="/user/{{ b.holder.user.username }}/">{{ b.holder }}</a></td>
 </tr>
 {% endfor %}
 </tbody>
@@ -37,4 +36,25 @@
 </div>
 
 </section>
+
+<script>
+//$(document).ready(function() {
+
+$.getJSON("/json/boardgames_list/", function(data) {
+	var $items = [];
+	alert(data);
+	$.each(data, function() {
+		items.push('<tr><td>' + this.fields.meta + '</td><td>' + this.fields.owner + '</td><td>' + this.fields.patron + '</td><td>' + this.fields.holder + '</td></tr>');
+	});
+	//$('<ul/>', {
+	//	'class': 'my-new-list',
+	//	html: items.join('')
+	//}).appendTo('#result');
+	//alert(items);
+	//$('tbody').append('<tr><td>Test</td><td>Test2</td><td>Test3</td><td>Test4</td></tr>');
+	$('#result').append('<p>Testowe dodanie.</p>');
+});
+//});
+</script>
+
 {% endblock %}

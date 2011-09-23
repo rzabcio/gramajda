@@ -16,9 +16,9 @@
 		{% for b in owner_of %}
 		<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
 		        <td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
-		        <td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
-		        <td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
-		        <td><a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a></td>
+		        <td><a href="/user/{{ b.owner.user.username }}/">{{ b.owner }}</a></td>
+		        <td><a href="/user/{{ b.patron.user.username }}/">{{ b.patron }}</a></td>
+		        <td><a href="/user/{{ b.holder.user.username }}/">{{ b.holder }}</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -27,7 +27,7 @@
 {% endif %}
 
 {% if patron_of %}
-	<h2>Opiekuje się:</h2>
+	<h3>Opiekuje się:</h3>
 	<table>
 	<tbody>
 		<tr>
@@ -39,9 +39,9 @@
 		{% for b in patron_of %}
 		<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
 		        <td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
-		        <td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
-		        <td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
-		        <td><a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a></td>
+		        <td><a href="/user/{{ b.owner.user.username }}/">{{ b.owner }}</a></td>
+		        <td><a href="/user/{{ b.patron.user.username }}/">{{ b.patron }}</a></td>
+		        <td><a href="/user/{{ b.holder.user.username }}/">{{ b.holder }}</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>
@@ -49,7 +49,7 @@
 {% endif %}
 
 {% if holder_of %}
-	<h2>Posiada:</h2>
+	<h3>Posiada:</h3>
 	<table>
 	<tbody>
 		<tr>
@@ -61,9 +61,9 @@
 		{% for b in holder_of %}
 		<tr class="{% if forloop.counter|divisibleby:2 %}row-b{% else %}row-a{% endif %}">
 		        <td><a href="/boardgame/{{ b.id }}/">{{ b.meta.title }}</a></td>
-		        <td><a href="/user/{{ b.owner.username }}/">{{ b.owner }}</a></td>
-		        <td><a href="/user/{{ b.patron.username }}/">{{ b.patron }}</a></td>
-		        <td><a href="/user/{{ b.holder.username }}/">{{ b.holder }}</a></td>
+		        <td><a href="/user/{{ b.owner.user.username }}/">{{ b.owner }}</a></td>
+		        <td><a href="/user/{{ b.patron.user.username }}/">{{ b.patron }}</a></td>
+		        <td><a href="/user/{{ b.holder.user.username }}/">{{ b.holder }}</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>
