@@ -32,6 +32,17 @@ def boardgames_list(request,json):
                 extra_context={},
 		template_name='boardgames_list.html')
 
+def boardgames(request,json):
+	if json:
+		return json_boardgames_list(request)
+	boardgames = Boardgame.objects.all().order_by("meta__title")
+        return object_list(
+                request,
+                boardgames,
+                paginate_by=20,
+                extra_context={},
+		template_name='boardgames_list.html')
+
 def boardgame_view(request,boardgameid):
 	b = Boardgame.objects.get(id=boardgameid)
 	users = GUser.objects.all().order_by('user__username')
